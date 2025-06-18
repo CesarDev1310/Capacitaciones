@@ -1,0 +1,21 @@
+.r-01-c01 {
+  display: flex;
+  align-items: center;
+}
+
+.c02-c01 {
+  justify-content: flex-end !important;
+  display: flex;
+}
+
+.c02-c02 {
+  display: flex;
+  align-items: center;
+}
+
+.card-m{
+    width: 30% !important;
+    height: 150px !important;
+    margin-right: 2% !important;
+    flex-wrap: nowrap !important;
+}

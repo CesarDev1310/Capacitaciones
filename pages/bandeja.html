@@ -5,41 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Sistema de Capacitaciones</title>
     <link href="../lib/bootstrap/bootstrap.min.css" rel="stylesheet" />
+    <link href="../css/bandeja.css" rel="stylesheet">
   </head>
   <body>
     <!--Contenido de Bandeja-->
     <div class="container mt-5">
-      <div class="row">
-        <div class="col-sm-8">
+      <div class="row mb-1">
+        <div class="col-sm-8 r-01-c01">
           <h5>Sistema de Capacitaciones</h5>
         </div>
         <div class="col-sm-4">
           <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-6 c02-c01">
               <img src="../img/icons/masculino.png" alt="" />
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-6 c02-c02">
               <a href="">Iniciar Sesión</a>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-sm-9">
-          <div class="card">
+      <div class="row p-4">
+        <div class="col-sm-9 ">
+          <div class="row">
+            <div class="card card-m">
             <div class="card-body">Programas</div>
           </div>
 
-          <div class="card">
+          <div class="card card-m">
             <div class="card-body">Cursos</div>
           </div>
 
-          <div class="card">
+          <div class="card card-m">
             <div class="card-body">Otros</div>
           </div>
+          </div>
         </div>
-        <div class="col-sm-3">
+        <div class="col-sm-3 p-3">
           <form class="d-flex" role="search">
             <input
               class="form-control me-2"
@@ -63,5 +66,6 @@
     <script src="../lib/bootstrap/popper.min.js"></script>
     <script src="../lib/bootstrap/bootstrap.min.js"></script>
     <script src="../lib/jquery/jquery-3.7.1.min.js"></script>
+    <script src="../js/bandeja.js"></script>
   </body>
 </html>
