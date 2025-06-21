@@ -1,3 +1,7 @@
+
+
+
+
 let listaTipos = [
   {
     codTipo: "01",
@@ -74,3 +78,23 @@ let listaCursos = [
     docente: "Docente 02",
   },
 ];
+
+
+
+let dataDemo = [
+  ["C00001", "Habilidades Blandas", listaTipos.find(x=> x.codTipo == "02").nombre],
+  ["C00002", "Ingles", listaTipos.find(x=> x.codTipo == "03").nombre],
+  ["C00003", "Chino Mandarin", listaTipos.find(x=> x.codTipo == "04").nombre]
+];
+
+let miTabla = new DataTable('#miTabla', {
+  language : {
+    url: '//cdn.datatables.net/plug-ins/2.3.2/i18n/es-ES.json',
+  },
+  columns:[
+    {title: "Código"},
+    {title: "Nombre Curso/Programa"},
+    {title: "Tipo"}
+  ],
+  data: dataDemo
+});
