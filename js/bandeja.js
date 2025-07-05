@@ -123,10 +123,9 @@ function generarTabla(v_arr01) {
 
     if (e.codTipo == "01") {
       botoncito =
-        "<button class='btn btn-sm btn-success' >Ver</button>" +
-        '<button class="btn btn-sm btn-success" onclick="verCursos("1321321")" >Cursos</button>';
-    }
-
+        `<button class='btn btn-sm btn-success' >Ver</button>
+        <button class='btn btn-sm btn-success' onclick="verCursos('${e.cod_item}','${e.codTipo}')" >Cursos</button>`;
+    }   
     miTabla.row
       .add([
         e.cod_item,
@@ -143,8 +142,20 @@ generarTabla(listaCursos);
 generarTabla(listaProgramas);
 
 
-function verCursos(valor){
+function verCursos(cod, tipo){
 
-  console.log("Codigo recibido "+ valor);
+  //Buscar el programa en la lista de programas
+  let programa = listaProgramas.find(x=>x.cod_item == cod);
+  $("#modalCursosLabel").text(programa.nombre);
+  //Obtienes los cursos
+  let curso = programa.items(listaCursos);
+  $("#listaCursos").empty();
+  curso.listaCursos.forEach(cursito => {
+    $("#listaCursos").append('<li class="list-group-item">'+cursito.nombre+'</li>');
+  });
+  //Iteras los cursos para crearlos dinamicamente en el modal
 
+  $("#modalCursos").modal("show");
+
+  console.log(cursos);
 }

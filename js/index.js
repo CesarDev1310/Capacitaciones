@@ -12,8 +12,7 @@ function login(usuario, contrasenia) {
   if (usuario == user && contrasenia == pass) {
     console.log("Acceso autorizado");
   } else {
-    nroIntentos = nroIntentos + 1;
-
+    nroIntentos++;
     if (nroIntentos >= 3) {
       console.log("Superó el número de intentos permitidos");
     } else {

@@ -50,9 +50,29 @@ function saludar() {
 }
 
 function saludarDos(mensaje) {
+  let mensaje = "";
   console.log(mensaje);
 }
 
 function saludarTres(nombre, edad) {
   return "Hola " + nombre + ", tienes " + edad + " años";
 }
+
+/*
+  switch (tipo) {
+    case "01":
+        console.log("Hacemoss algo")
+   
+
+      break;
+
+    case "02":|      
+      break; 
+    case "03":      
+      break;
+    default: //02
+      console.log("Hacemoss algo")
+      break;
+  }
+
+*/
