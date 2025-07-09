@@ -37,37 +37,6 @@ let listaTipos = [
   },
 ];
 
-let listaProgramas = [
-  {
-    cod_item: "P00001",
-    nombre: "Programa de Inicio",
-    codTipo: "01",
-    items: function (val) {
-      return {
-        listaCursos: val,
-        listaDocentes: new Set(val.map((c) => c.docente)),
-        nroHoras: val.map((c) => c.duracion).reduce((i, d) => i + d, 0),
-        nroCursos: val.length,
-        nroCreditos: val.map((c) => c.creditos).reduce((i, d) => i + d, 0),
-      };
-    },
-  },
-  {
-    cod_item: "P00002",
-    nombre: "Programa Intermedio",
-    codTipo: "01",
-    items: function (val) {
-      return {
-        listaCursos: val,
-        listaDocentes: new Set(val.map((c) => c.docente)),
-        nroHoras: val.map((c) => c.duracion).reduce((i, d) => i + d, 0),
-        nroCursos: val.length,
-        nroCreditos: val.map((c) => c.creditos).reduce((i, d) => i + d, 0),
-      };
-    },
-  },
-];
-
 let listaCursos = [
   {
     cod_item: "C00001",
@@ -118,24 +87,32 @@ listaCursos.forEach((e) => {
 
 function generarTabla(v_arr01) {
 
-  v_arr01.forEach((e) => {
+  miTabla.clear();
+
+  for (let i = 0; i < v_arr01.length; i++) {
+    
+    if (v_arr01[i].nombre == "n/a") {      
+      continue;
+    }
+
     let botoncito = "<button class='btn btn-sm btn-success' >Ver</button>";
 
-    if (e.codTipo == "01") {
+    if (v_arr01[i].codTipo == "01") {
       botoncito =
         `<button class='btn btn-sm btn-success' >Ver</button>
-        <button class='btn btn-sm btn-success' onclick="verCursos('${e.cod_item}','${e.codTipo}')" >Cursos</button>`;
+        <button class='btn btn-sm btn-success' onclick="verCursos('${v_arr01[i].cod_item}','${v_arr01[i].codTipo}')" >Cursos</button>`; 
     }   
     miTabla.row
       .add([
-        e.cod_item,
-        e.nombre,
-        listaTipos.find((x) => x.codTipo == e.codTipo).nombre,
+        v_arr01[i].cod_item,
+        v_arr01[i].nombre,
+        listaTipos.find((x) => x.codTipo == v_arr01[i].codTipo).nombre,
         botoncito,
       ])
       .draw(true);
     miTabla.draw();
-  });
+  }
+
 }
 
 generarTabla(listaCursos);
@@ -143,19 +120,51 @@ generarTabla(listaProgramas);
 
 
 function verCursos(cod, tipo){
-
+  debugger
   //Buscar el programa en la lista de programas
   let programa = listaProgramas.find(x=>x.cod_item == cod);
   $("#modalCursosLabel").text(programa.nombre);
   //Obtienes los cursos
-  let curso = programa.items(listaCursos);
   $("#listaCursos").empty();
-  curso.listaCursos.forEach(cursito => {
-    $("#listaCursos").append('<li class="list-group-item">'+cursito.nombre+'</li>');
-  });
-  //Iteras los cursos para crearlos dinamicamente en el modal
+
+  try {
+    crearButton(programa.cod_item);
+    let cursos = programa.items().listaCursos;
+    cursos.forEach(cursito => {
+      $("#listaCursos").append('<li class="list-group-item">'+cursito.nombre+'</li>');
+    });
+    //Iteras los cursos para crearlos dinamicamente en el modal
+
+    $("#modalCursos").modal("show");
+    
+  } catch (error) {
+    console.log(error.message)
+  }
 
   $("#modalCursos").modal("show");
-
-  console.log(cursos);
 }
+
+
+
+
+function agregarCursos(val){
+  debugger
+  let index = listaProgramas.findIndex(x=>x.cod_item == val);
+  listaProgramas[index].CursosPrograma.push("C00002");
+    $("#modalNuevoCurso").modal("show");
+
+    console.log(index+"   "+ listaProgramas[index].nombre);
+
+    
+    generarTabla(listaProgramas);
+}
+
+
+function crearButton(val){
+  $("#idButtonAdd").empty();
+  $("#idButtonAdd").append(`<small class="btn btn-small btn-info" onclick="agregarCursos('${val}')">Agregar Cursos Al Programa</small>`);
+}
+
+
+
+
